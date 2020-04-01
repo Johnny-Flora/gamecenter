@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>ゲーム一覧 ゲームセンター</title>
+    <meta name="description" content="今まで作成したゲームの一覧です" >
+    <link rel="stylesheet" href="gameListStyles.css">
+  </head>
+  <body>
+    <h1>ゲーム一覧</h1>
+
+    <div id="gameList">
+      <div class="item">
+        <div class="thumbnail"><a href="vsPI.html"><img src="vs PI.PNG"></a></div>
+        <div class="title"><a href="vsPI.html">vs PI</a></div>
+      </div>
+    </div>
+
+    <div id="toHome">ホームへ戻る</div>
+
+    <script>
+      "use strict";
+
+      {
+        document.getElementById("toHome").addEventListener("click", () => {
+          location.href = 'index.html';
+        });
+      }
+    </script>
+  </body>
+</html>
