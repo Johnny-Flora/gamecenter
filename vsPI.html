@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>vsPI ゲームセンター</title>
+    <meta name="description" content="円周率をひたすら打ち込んでいくタイピングゲームです" >
+    <link rel="stylesheet" href="vsPIStyles.css">
+  </head>
+  <body>
+    <div id="gameWindow">
+      <section id="titleContents">
+        <p id="gameTitle">vs PI</p>
+        <p id="startMessage">Click to Start!!</p>
+      </section>
+
+      <section id="game" class="hidden">
+        <p id="target">3.14</p>
+        <p id="time">Time: 0</p>
+      </section>
+    </div>
+
+    <h1>vs PI 遊び方</h1>
+
+    <div id="description">
+      <p>
+        1.ゲーム画面をクリック！<br>
+        2.小数点以下の桁数を選択！<br>
+        3.円周率をひたすらタイピング！
+      </p>
+    </div>
+
+    <div id="toGameList">ゲーム一覧に戻る</div>
+
+    <section id="modal" class="hidden">
+      <p>小数点以下のケタ数を選んでね！</p>
+      <div id="length">
+        <div id="fifty">50</div>
+        <div id="oneHundred">100</div>
+        <div id="threeHundred">300</div>
+      </div>
+    </section>
+
+    <section id="clear" class="hidden">
+      <p>ゲームクリア！</p>
+      <div id="toTitle">
+        Click to title.
+      </div>
+    </section>
+
+    <script src="vsPI.js"></script>
+  </body>
+</html>
