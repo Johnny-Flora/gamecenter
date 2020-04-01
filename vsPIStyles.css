@@ -1,0 +1,112 @@
+body {
+  text-align: center;
+  background-color: #3edf77;
+}
+
+#gameWindow {
+  width:640px;
+  height: 480px;
+  margin: 100px auto;
+  border: 10px groove lightgray;
+  background: #eee;
+}
+
+#titleContents,#game {
+  width: 640px;
+  height: 160px;
+  margin: 160px auto;
+}
+
+#gameTitle {
+  font-size: 48px;
+  letter-spacing: 3px;
+}
+
+#startMessage {
+  font-size: 25px;
+  letter-spacing: 3px;
+}
+
+#target {
+  font-size: 48px;
+  letter-spacing: 3px;
+}
+
+
+#modal,#clear {
+  background: white;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  position: fixed;
+  top: 260px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+
+#length {
+  display: flex;
+}
+
+#fifty,#oneHundred,#threeHundred {
+  cursor: pointer;
+  width: 60px;
+  border: 3px solid gray;
+  border-radius: 10px;
+  text-align: center;
+  padding: 12px 0;
+  margin: 16px auto 0;
+}
+
+#description {
+  margin: 60px auto 0;
+  padding: 0 15px;
+  width: 510px;
+  border: 10px groove gold;
+  background: #eee;
+  text-align: left;
+}
+
+#toGameList {
+  width: 300px;
+  height: 50px;
+  background: blue;
+  color: white;
+  border-radius: 30px;
+  margin: 50px auto;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 0 #1e1eb8;
+  user-select: none;
+}
+
+#toGameList:hover {
+  opacity: 0.8;
+}
+
+#toGameList:active {
+  box-shadow: 0 5px 0 #1e1eb8;
+  margin-top: 55px;
+}
+
+#toTitle {
+  cursor: pointer;
+  width: 150px;
+  border: 3px solid gray;
+  border-radius: 10px;
+  text-align: center;
+  padding: 12px 0;
+  margin: 16px auto 0;
+}
+
+#clear {
+  top: 240px;
+}
