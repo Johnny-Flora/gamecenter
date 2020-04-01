@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>ゲームセンター</title>
+    <meta name="description" content="JavaScriptを用いて作成したゲームを公開しているポートフォリオサイトです。" >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>ゲームセンターへようこそ</h1>
+
+    <div class="fortuneGame" style="height: 460px; margin-top:50px; margin-bottom: 30px;">
+      <p class="welcomeGame">
+        ウェルカムゲーム<br>
+        ～今日の運勢～
+      </p>
+
+      <div class="fortuneFlame">
+        <p id="fortune" class="active">???</p>
+      </div>
+      <div id="btn">ここをクリック！</div>
+    </div>
+
+
+
+    <p>更新情報</p>
+    <textarea readonly id="textarea"></textarea>
+
+    <div id="openDesc">
+      このサイトの説明
+    </div>
+
+    <div id="toGameList">ゲーム一覧</div>
+
+    <div id="mask" class="hidden"></div>
+
+    <section id="modal" class="hidden">
+      <p>このサイトは、JavaScriptを用いて作成したゲームを<br>公開しているポートフォリオサイトです。</p>
+      <div id="close">
+        閉じる
+      </div>
+    </section>
+
+    <script>
+      "use strict";
+
+      {
+        const fortune = document.getElementById("fortune");
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+          //activeクラスがついているとき、おみくじを実行
+          if (document.getElementById("fortune").classList.contains("active")) {
+            const results = ["大吉!", "中吉!", "小吉", "末吉...", "凶!"];
+            const bgcolors = ["red", "pink", "none", "blue", "black"];
+            const colors = ["white", "red", "black", "white", "yellow"];
+            const n = Math.floor(Math.random() * 5);
+
+            fortune.textContent = results[n];
+            fortune.style.background = bgcolors[n];
+            fortune.style.color = colors[n];
+
+            //結果が出たらactiveクラスを消去し、おみくじを実行できなくする
+            document.getElementById("fortune").classList.remove("active")
+
+          }
+
+
+        });
+
+        let textarea = document.getElementById('textarea');
+        textarea.value =
+        "2020/04/02 タイピングゲーム「vs PI」を公開しました\n2020/03/26 サイトの説明を追加しました\n2020/03/25 ウェルカムゲーム「今日の運勢」を公開しました";
+
+        const open = document.getElementById("openDesc");
+        const close = document.getElementById("close");
+        const modal = document.getElementById("modal");
+        const mask = document.getElementById("mask");
+
+        open.addEventListener("click", () => {
+          modal.classList.remove("hidden");
+          mask.classList.remove("hidden");
+        });
+
+        close.addEventListener("click", () => {
+          modal.classList.add("hidden");
+          mask.classList.add("hidden");
+        });
+
+        mask.addEventListener("click", () => {
+          close.click();
+        });
+
+        document.getElementById("toGameList").addEventListener("click", () => {
+          location.href = 'gameList.html';
+        });
+      }
+    </script>
+  </body>
+</html>
