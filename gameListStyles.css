@@ -7,10 +7,12 @@ body {
   width: 960px;
   margin: 0 auto;
   margin-top: 50px;
+  display: flex;
 }
 
 .item {
   width: 260px;
+  margin-right: 60px;
 }
 
 img {
