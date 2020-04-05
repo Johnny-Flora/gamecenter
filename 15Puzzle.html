@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>15Puzzle ゲームセンター</title>
+    <meta name="description" content="パネルをスライドさせて番号順に並べ替えるパズルゲームです" >
+    <link rel="stylesheet" href="15Puzzlestyles.css">
+  </head>
+  <body>
+    <canvas id="stage" width="280" height="280">
+      Sorry, canvas is not supported...
+    </canvas>
+
+    <h1>15 Puzzle 遊び方</h1>
+
+    <div id="description">
+      <p>
+        1.パズルをクリックして動かそう<br>
+        2.0～14まで順番に並べ替えたらクリア！
+      </p>
+    </div>
+
+    <div id="toGameList">ゲーム一覧に戻る</div>
+
+    <script>
+      "use strict";
+
+      {
+        let canvas = document.getElementById("stage");
+        let context;
+        let image;
+        let IMAGE_URL = "15puzzle.png";
+
+        let tiles = [];
+        let ROW_COUNT = 4;
+        let COL_COUNT = 4;
+        let PIC_WIDTH = 280;
+        let PIC_HEIGHT = 280;
+        let TILE_WIDTH = PIC_WIDTH / COL_COUNT;
+        let TILE_HEIGHT = PIC_HEIGHT / ROW_COUNT;
+        const UDLR = [
+          [ 0, -1],
+          [ 0,  1],
+          [-1,  0],
+          [ 1,  0]
+        ];
+        let moveCount = 100;
+
+        function initTiles() {
+          let row;
+          let col;
+          for (row = 0; row < ROW_COUNT; row++) {
+            tiles[row] = [];
+            for (col = 0; col < COL_COUNT; col++) {
+              tiles[row][col] = row * COL_COUNT + col;
+            }
+          }
+          tiles[ROW_COUNT - 1][COL_COUNT - 1] = -1;
+        }
+
+        function drawPuzzle() {
+          let row;
+          let col;
+          let sx;
+          let sy;
+          let dx;
+          let dy;
+
+          let w = 70;
+          let h = 70;
+
+          for (row = 0; row < ROW_COUNT; row++) {
+            for (col = 0; col < COL_COUNT; col++) {
+              dx = col * TILE_WIDTH;
+              dy = row * TILE_HEIGHT;
+
+              if (tiles[row][col] === -1) {
+                context.fillStyle = "#eeeeee";
+                context.fillRect(dx, dy, TILE_WIDTH, TILE_HEIGHT);
+              } else {
+                sx = (tiles[row][col] % COL_COUNT) * TILE_WIDTH;
+                sy = Math.floor((tiles[row][col] / COL_COUNT)) * TILE_HEIGHT;
+
+                context.drawImage(image, sx, sy, TILE_WIDTH, TILE_HEIGHT, dx, dy, TILE_WIDTH, TILE_HEIGHT);
+              }
+            }
+          }
+        }
+
+        function checkResult() {
+          let row;
+          let col;
+          for (row = 0; row < ROW_COUNT; row++) {
+            for (col = 0; col < COL_COUNT; col++) {
+              if (row === ROW_COUNT - 1 && col === COL_COUNT - 1) {
+                return true;
+              }
+              if (tiles[row][col] !== row * COL_COUNT + col) {
+                return false;
+              }
+            }
+          }
+        }
+
+        function moveBlank(count) {
+          let blankRow = ROW_COUNT - 1;
+          let blankCol = COL_COUNT - 1;
+          let targetPosition;
+          let targetRow;
+          let targetCol;
+
+          while(true) {
+            targetPosition = Math.floor(Math.random() * UDLR.length);
+            targetRow = blankRow + UDLR[targetPosition][1];
+            targetCol = blankCol + UDLR[targetPosition][0];
+            if (targetCol < 0 || targetCol >= COL_COUNT) {
+              continue;
+            }
+            if (targetRow < 0 || targetRow >= ROW_COUNT) {
+              continue;
+            }
+            tiles[blankRow][blankCol] = tiles[targetRow][targetCol];
+            tiles[targetRow][targetCol] = -1;
+            blankRow = targetRow;
+            blankCol = targetCol;
+            if(!--count){
+              break;
+            }
+          }
+
+        }
+
+        context = canvas.getContext("2d");
+
+        image = document.createElement("img");
+        image.src = IMAGE_URL;
+        image.addEventListener("load", () => {
+          initTiles();
+          moveBlank(moveCount);
+          drawPuzzle();
+        });
+
+        canvas.addEventListener("click", (e) => {
+          let rect = e.target.getBoundingClientRect();
+          let x = e.clientX - rect.left;
+          let y = e.clientY - rect.top;
+          let row = Math.floor(y / TILE_HEIGHT);
+          let col = Math.floor(x / TILE_WIDTH)
+          let i;
+          let targetRow;
+          let targetCol;
+          if (tiles[row][col] === -1) {
+            return;
+          }
+
+          for (i = 0; i < UDLR.length; i++) {
+            targetRow = row + UDLR[i][1];
+            targetCol = col + UDLR[i][0];
+            if (targetRow < 0 || targetRow >= ROW_COUNT) {
+              continue;
+            }
+            if (targetCol < 0 || targetCol >= COL_COUNT) {
+              continue;
+            }
+            if (tiles[targetRow][targetCol] === -1) {
+              tiles[targetRow][targetCol] = tiles[row][col];
+              tiles[row][col] = -1;
+              drawPuzzle();
+              if (checkResult()) {
+                setTimeout(() => {
+                  alert("おめでとう！");
+                }, 1);
+              }
+              break;
+            }
+          }
+        });
+
+        document.getElementById("toGameList").addEventListener("click", () => {
+          location.href = 'gameList.html';
+        });
+      }
+    </script>
+
+  </body>
+</html>
