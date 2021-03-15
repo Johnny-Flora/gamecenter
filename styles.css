@@ -4,10 +4,14 @@ body {
 }
 
 h1 {
-  color: #be4040;
+  color: #000;
   border: 15px groove lightblue;
   margin: auto;
   width: 500px;
+}
+
+span {
+  font-family: "HG行書体","HGP行書体",cursive;
 }
 
 .welcomeGame {
